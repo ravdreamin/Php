@@ -1,98 +1,107 @@
-# Your Project Title
+# Unit Converter Calculator
 
-<!-- Badges: Replace user/repo with your GitHub details. You can find more badges at https://shields.io/ -->
-![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
-![GitHub stars](https://img.shields.io/github/stars/your-username/your-repo?style=social)
-![GitHub forks](https://img.shields.io/github/forks/your-username/your-repo?style=social)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
-> A short and catchy one-sentence description of your project.
+> A simple and user-friendly unit conversion calculator built with PHP and MySQL.
 
-A more detailed paragraph explaining what your project does, what problem it solves, and who it is for.
+This web application allows users to convert between different units of measurement including length, weight, and temperature. The conversion history is stored in a MySQL database for future reference.
 
 ## ✨ Features
 
-- **Feature A:** Brief description of what this feature does.
-- **Feature B:** Brief description of what this feature does.
-- **Feature C:** Brief description of what this feature does.
+- **Multiple Conversion Categories:** Convert between units of length, weight, and temperature.
+- **User-Friendly Interface:** Clean and intuitive design for easy navigation.
+- **Database Integration:** Stores conversion history in MySQL database.
+- **Responsive Design:** Works well on both desktop and mobile devices.
 
 ---
 
 ## 📚 Table of Contents
 
-- [Installation](#-installation)
+- [Requirements](#-requirements)
+- [Installation with XAMPP](#-installation-with-xampp)
 - [Usage](#-usage)
-- [Configuration](#-configuration)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [Database Setup](#-database-setup)
+- [Project Structure](#-project-structure)
 
 ---
 
-## 🚀 Installation
+## 📋 Requirements
 
-Provide clear, step-by-step instructions on how to set up your project locally.
+- XAMPP (or any PHP server with MySQL)
+- PHP 7.0 or higher
+- MySQL 5.6 or higher
+- Web browser
 
-**Prerequisites:**
+---
 
-- Node.js (v18.x or higher)
-- npm or yarn
+## 🚀 Installation with XAMPP
 
-**Steps:**
+1. **Install XAMPP**
+   - Download XAMPP from [https://www.apachefriends.org/](https://www.apachefriends.org/)
+   - Follow the installation instructions for your operating system
+   - Start the Apache and MySQL services from the XAMPP Control Panel
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/your-repo.git
-    ```
-2.  Navigate into the project directory:
-    ```bash
-    cd your-repo
-    ```
-3.  Install dependencies:
-    ```bash
-    npm install
-    # or
-    # yarn install
-    ```
+2. **Clone or Download the Project**
+   - Place the project files in the `htdocs` folder of your XAMPP installation:
+     - Windows: `C:\xampp\htdocs\unit-converter`
+     - macOS: `/Applications/XAMPP/htdocs/unit-converter`
+     - Linux: `/opt/lampp/htdocs/unit-converter`
+
+3. **Set Up the Database**
+   - Open your web browser and navigate to `http://localhost/phpmyadmin`
+   - Create a new database named `converter_db`
+   - Import the `converter_db.sql` file to set up the required tables
+
+4. **Configure Database Connection**
+   - Open the `db_connect.php` file
+   - Update the database credentials if needed (default XAMPP credentials are usually username: 'root', password: '')
 
 ---
 
 ## 💻 Usage
 
-Explain how to use your project. Provide clear code examples.
+1. Start XAMPP and ensure both Apache and MySQL services are running
+2. Open your web browser and navigate to:
+   ```
+   http://localhost/unit-converter
+   ```
+   (Replace "unit-converter" with the name of your project folder in htdocs)
 
-```javascript
-// Import the necessary module/function
-const myPackage = require('my-package');
+3. Use the form to:
+   - Enter a value to convert
+   - Select a conversion category (length, weight, or temperature)
+   - Choose the units to convert from and to
+   - Click the "Convert" button to see the result
 
-// Example usage
-myPackage.doSomething();
+---
+
+## 🗄️ Database Setup
+
+The project uses a MySQL database to store conversion history. The database structure is included in the `converter_db.sql` file.
+
+If you need to manually set up the database, create a table with the following structure:
+
+```sql
+CREATE TABLE conversions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    value_from FLOAT NOT NULL,
+    unit_from VARCHAR(50) NOT NULL,
+    value_to FLOAT NOT NULL,
+    unit_to VARCHAR(50) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    conversion_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
-You can also include instructions on how to run tests or start the application:
-
-```bash
-# Run the application
-npm start
-
-# Run tests
-npm test
-```
-
 ---
 
-## ⚙️ Configuration
+## 📁 Project Structure
 
-If your project requires configuration (e.g., environment variables), explain what they are and how to set them up. Create a `.env.example` file if needed.
-
----
-
-## 🤝 Contributing
-
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-Please read `CONTRIBUTING.md` for details on our code of conduct and the process for submitting pull requests to us.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the `LICENSE.md` file for details.
+- `index.php` - Main application interface
+- `convert.php` - Handles the conversion logic
+- `db_connect.php` - Database connection configuration
+- `converter_db.sql` - SQL file for database setup
+- `style.css` - CSS styles for the application
